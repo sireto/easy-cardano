@@ -81,6 +81,9 @@ sKeyToPkh skey= PubKeyHash (toBuiltin  $  serialiseToRawBytes  vkh)
   where
     vkh=verificationKeyHash   $ getVerificationKey  skey
 
+sKeyToVkH:: SigningKey PaymentKey ->  Hash PaymentKey 
+sKeyToVkH  skey = verificationKeyHash   $ getVerificationKey  skey
+
 pkhToMaybeAddr:: NetworkId -> PubKeyHash -> Maybe (AddressInEra  AlonzoEra)
 pkhToMaybeAddr network (PubKeyHash pkh) =do
     key <- vKey

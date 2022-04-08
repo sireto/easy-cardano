@@ -308,7 +308,9 @@ mkTxWithChange networkCtx (TxOperationBuilder change input output signature oPco
               ,
             txMetadata=TxMetadataNone ,
             txAuxScripts=TxAuxScriptsNone,
-            txExtraKeyWits=TxExtraKeyWitnessesNone,
+            txExtraKeyWits= if  null signature        
+                              then TxExtraKeyWitnessesNone 
+                              else TxExtraKeyWitnesses ExtraKeyWitnessesInAlonzoEra  (map sKeyToVkH signature),
             txProtocolParams=BuildTxWith (Just  pParam),
             txWithdrawals=TxWithdrawalsNone,
             txCertificates=TxCertificatesNone,
@@ -341,7 +343,6 @@ mkTxWithChange networkCtx (TxOperationBuilder change input output signature oPco
       Testnet nm -> SlotNo $ fromIntegral $ testnetSlot tStamp
     testnetSlot timestamp= ((timestamp -1607199617000) `div` 1000 )+ 12830401 -- using epoch 100 as refrence
     mainnetSlot timestamp = ((timestamp -1596491091000 ) `div` 1000 )+ 4924800 -- using epoch 209 as reference
-
 mkBalancedBody :: ProtocolParameters
   -> UTxO AlonzoEra
   -> TxBodyContent BuildTx AlonzoEra
