@@ -329,7 +329,7 @@ mkTxWithChange networkCtx (TxOperationBuilder change input output signature oPco
                                         -- only ada then it's ok
                                         TxOutAdaOnly oasie (Lovelace lo) -> lo>=2500000
                                         -- make sure that it has only one asset and that one is ada asset.
-                                        TxOutValue masie va -> length vals == 1 && snd(head vals) >= 2500000
+                                        TxOutValue masie va -> length vals == 1 && snd(head vals) >= 2000000
                                               where
                                                 vals=valueToList  va
     unWrapBalance f = do
