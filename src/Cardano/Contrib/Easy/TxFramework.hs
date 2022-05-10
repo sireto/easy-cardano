@@ -304,9 +304,9 @@ mkTxWithChange networkCtx (TxOperationBuilder change input output signature oPco
     defaultExunits=ExecutionUnits {executionSteps=194494645 + 553337, executionMemory=5334093}
     isOnlyAdaTxOut (TxOut a v d) = case v of
                                         -- only ada then it's ok
-                                        TxOutAdaOnly oasie lo -> True
+                                        TxOutAdaOnly oasie lo -> lo > 1_000_000
                                         -- make sure that it has only one asset and that one is ada asset.
-                                        TxOutValue masie va -> length vals == 1 && snd(head vals) > 0
+                                        TxOutValue masie va -> length vals == 1 && snd(head vals) > 1_000_000
                                               where
                                                 vals=valueToList  va
     unWrapBalance f = do
